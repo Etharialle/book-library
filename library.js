@@ -1,4 +1,11 @@
-const myLibrary = [];
+const myLibrary = [{
+    "title": "The Fellowship of the Ring",
+    "author": "J.R.R. Tolkein",
+    "pages": 450,
+    "read": true,
+    "rating": 5
+}];
+createLibraryCards(myLibrary);
 
 function Book(title, author, pages, read, rating) {
     this.title = title; // Title of book as String
@@ -35,15 +42,21 @@ function createLibraryCards(myLibrary) {
         const divThreeLibraryCard = document.createElement("div");
         divThreeLibraryCard.classList.add("flex", "column");
         const progressLibraryCard = document.createElement("p");
+        progressLibraryCard.addEventListener("click", () => {
+            changeReadStatus(bookIndex);
+        });
         if (book.read) {
             progressLibraryCard.textContent = "Progress: 100%";
         } else {
             progressLibraryCard.textContent = "Progress: 0%";
         }
+        const progressIcon = document.createElement("img");
+        progressIcon.src = "images/list-status.svg";
+        progressIcon.classList.add("icons");
         const ratingTextLibraryCard = document.createElement("p");
         ratingTextLibraryCard.textContent = "Rating:";
         const divFourLibraryCard = document.createElement("div");
-        divFourLibraryCard.classList.add("flex");
+        divFourLibraryCard.classList.add("flex", "rating-stars");
         for (let i = 1; i <= book.rating; i++) {
             const star = document.createElement("img");
             star.src = "images/star.svg";
@@ -63,10 +76,17 @@ function createLibraryCards(myLibrary) {
         bookRemove.addEventListener("click", () => {
             removeBook(bookIndex);
         });
+        starRemove.addEventListener("click", () => {
+            decreaseRating(bookIndex);
+        });
+        starPlus.addEventListener("click", () => {
+            increaseRating(bookIndex);
+        });
         divFiveLibraryCard.appendChild(starPlus);
         divFiveLibraryCard.appendChild(starRemove);
         divFiveLibraryCard.appendChild(bookRemove);
         divThreeLibraryCard.appendChild(progressLibraryCard);
+        //divThreeLibraryCard.appendChild(progressIcon);
         divThreeLibraryCard.appendChild(ratingTextLibraryCard);
         divThreeLibraryCard.appendChild(divFourLibraryCard);
         divTwoLibraryCard.appendChild(divThreeLibraryCard);
@@ -96,8 +116,30 @@ function getNewBook() {
 }
 
 function removeBook(bookIndex) {
-
     myLibrary.splice(bookIndex, 1);
+    createLibraryCards(myLibrary);
+}
+
+function changeReadStatus(bookIndex) {
+    if (myLibrary[bookIndex].read == true) {
+        myLibrary[bookIndex].read = false;
+    } else if (myLibrary[bookIndex].read == false) {
+        myLibrary[bookIndex].read = true;
+    }
+    createLibraryCards(myLibrary);
+}
+
+function increaseRating(bookIndex) {
+    if (myLibrary[bookIndex].rating < 5) {
+        myLibrary[bookIndex].rating++;
+    }
+    createLibraryCards(myLibrary);
+}
+
+function decreaseRating(bookIndex) {
+    if (myLibrary[bookIndex].rating > 0) {
+        myLibrary[bookIndex].rating--;
+    }
     createLibraryCards(myLibrary);
 }
 
