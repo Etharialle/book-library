@@ -21,6 +21,7 @@ function createLibraryCards(myLibrary) {
     myLibrary.forEach((book) => {
         const divLibraryCard = document.createElement("div");
         divLibraryCard.classList.add("card");
+        //console.log(i);
         const titleLibraryCard = document.createElement("h4");
         titleLibraryCard.textContent = book.title;
         const authorLibraryCard = document.createElement("p");
@@ -49,10 +50,24 @@ function createLibraryCards(myLibrary) {
             star.classList.add("icons");
             divFourLibraryCard.appendChild(star);
         }
+        const divFiveLibraryCard = document.createElement("div");
+        const starPlus = document.createElement("img");
+        const starRemove = document.createElement("img");
+        const bookRemove = document.createElement("img");
+        starPlus.src = "images/star-plus.svg";
+        starRemove.src = "images/star-remove.svg";
+        bookRemove.src = "images/book-remove.svg";
+        starPlus.classList.add("icons");
+        starRemove.classList.add("icons");
+        bookRemove.classList.add("icons");
+        divFiveLibraryCard.appendChild(starPlus);
+        divFiveLibraryCard.appendChild(starRemove);
+        divFiveLibraryCard.appendChild(bookRemove);
         divThreeLibraryCard.appendChild(progressLibraryCard);
         divThreeLibraryCard.appendChild(ratingTextLibraryCard);
         divThreeLibraryCard.appendChild(divFourLibraryCard);
         divTwoLibraryCard.appendChild(divThreeLibraryCard);
+        divTwoLibraryCard.appendChild(divFiveLibraryCard);
         divLibraryCard.appendChild(titleLibraryCard);
         divLibraryCard.appendChild(authorLibraryCard);
         divLibraryCard.appendChild(pagesLibraryCard);
@@ -72,15 +87,10 @@ function getNewBook() {
         newBookValues.push(inputItem.value);
         }
     });
-    console.log(newBookValues);
     addBookToLibrary(newBookValues);
     createLibraryCards(myLibrary);
 }
 
-//createLibraryCards(myLibrary);
-//createLibraryCards(myLibrary);
 
 const addNewBookButton = document.querySelector("#newBook");
-addNewBookButton.addEventListener("click", () => {
-    getNewBook();
-});
+addNewBookButton.addEventListener("click", getNewBook);
