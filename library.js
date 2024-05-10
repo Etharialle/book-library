@@ -18,10 +18,10 @@ function addBookToLibrary(newBookValues) {
 function createLibraryCards(myLibrary) {
     const library = document.querySelector("#library");
     library.replaceChildren();
-    myLibrary.forEach((book) => {
+    myLibrary.forEach(function (book, bookIndex) {
         const divLibraryCard = document.createElement("div");
         divLibraryCard.classList.add("card");
-        //console.log(i);
+        divLibraryCard.id = bookIndex;
         const titleLibraryCard = document.createElement("h4");
         titleLibraryCard.textContent = book.title;
         const authorLibraryCard = document.createElement("p");
@@ -60,6 +60,9 @@ function createLibraryCards(myLibrary) {
         starPlus.classList.add("icons");
         starRemove.classList.add("icons");
         bookRemove.classList.add("icons");
+        bookRemove.addEventListener("click", () => {
+            removeBook(bookIndex);
+        });
         divFiveLibraryCard.appendChild(starPlus);
         divFiveLibraryCard.appendChild(starRemove);
         divFiveLibraryCard.appendChild(bookRemove);
@@ -74,7 +77,8 @@ function createLibraryCards(myLibrary) {
         divLibraryCard.appendChild(hrLibraryCard);
         divLibraryCard.appendChild(divTwoLibraryCard);
         library.appendChild(divLibraryCard);
-    })
+        
+    });
 }
 
 function getNewBook() {
@@ -91,6 +95,11 @@ function getNewBook() {
     createLibraryCards(myLibrary);
 }
 
+function removeBook(bookIndex) {
+
+    myLibrary.splice(bookIndex, 1);
+    createLibraryCards(myLibrary);
+}
 
 const addNewBookButton = document.querySelector("#newBook");
 addNewBookButton.addEventListener("click", getNewBook);
