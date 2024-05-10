@@ -11,10 +11,53 @@
     <div class="header">
         <h1>Etharialle's Library</h1>
     </div>
-    <div class="main-content">
-        <div id="library">
-
+    <div class="sidebar">
+        <h2>Add Book to Library</h2>
+        <hr>
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title">
+        <label for="author">Author:</label>
+        <input type="text" name="author" id="author">
+        <label for="pages">Number of Pages:</label>
+        <input type="number" name="pages" id="pages" min="1">
+        <div class="middle">
+            <label for="read">Read yet?:</label>
+            <input type="checkbox" name="read" id="read">
         </div>
+        <label for="rating">Rating (1-5):</label>
+        <div>
+            <input type="range" name="rating" id="rating" min="0" max="5" value="0" oninput="rangeValue.innerText = this.value">
+            <p id="rangeValue">0</p>
+        </div>
+        <button id="newBook">Add New Book</button>
+
+
+    </div>
+    <div class="main-content" id="library">
+        <div class="card">
+            <h4>The Fellowship of the Ring</h4>
+            <p class="author">J.R.R. Tolkein</p>
+            <p>350 pages</p>
+            <hr>
+            <div class="flex">
+                <div class="flex column">
+                    <p>Progress: 100%</p>
+                    <p>Rating:</p>
+                    <div class="flex">
+                        <img src="images/star.svg" class="icons">
+                        <img src="images/star.svg" class="icons">
+                        <img src="images/star.svg" class="icons">
+                        <img src="images/star.svg" class="icons">
+                        <img src="images/star.svg" class="icons">
+                    </div>
+                </div>
+                <div>
+                    <img src="images/star-plus.svg" class="icons">
+                    <img src="images/star-remove.svg" class="icons">
+                    <img src="images/book-remove.svg" class="icons">
+                </div>
+            </div>
+
     </div>
     <div class="footer">
 
